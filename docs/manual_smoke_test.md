@@ -5,11 +5,11 @@
 ## 0. 先跑自動測試
 
 ```bash
-pip install pytest
-pytest -q
+python -m pip install pytest
+python -m pytest -q
 ```
 
-目前 repository 內建測試共 101 個，這一步應先全綠，再開始手動驗證。
+目前 repository 內建測試共 276 個，這一步應先全綠，再開始手動驗證。
 
 ## 1. 建議準備的測試素材
 

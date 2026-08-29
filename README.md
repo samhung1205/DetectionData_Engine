@@ -14,7 +14,10 @@
 ## 安裝
 
 ```bash
-pip install -r requirements.txt
+python -m venv .venv
+source .venv/bin/activate  # Windows PowerShell: .venv\\Scripts\\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 依賴套件：
@@ -31,6 +34,13 @@ pip install -r requirements.txt
 ```bash
 python GUI.py
 ```
+
+## Repository 內的參考素材
+
+- `dataset/` 保留一組可供手動 smoke test 與格式檢查使用的影像／YOLO label 參考資料。
+- `rembg_img/` 保留 copy-paste augmentation 可直接載入的透明 PNG cutout。
+- 這兩個目錄中既有的參考檔會持續 version-control；新加入的本機研究資料預設由 `.gitignore` 排除，避免誤提交大型或未整理資料。
+- `.autosave/` 與 `.review_state/` 是每台機器執行時產生的工作狀態，不屬於可重現的 source 或 example data。
 
 ## 重構前建議先驗證
 
@@ -465,11 +475,11 @@ GUI/
 ## 執行測試
 
 ```bash
-pip install pytest
-pytest -q
+python -m pip install pytest
+python -m pytest -q
 ```
 
-目前共 264 個測試，涵蓋所有 `sdde/` 模組的核心邏輯、legacy `data.yaml` 相容解析、GUI 與 service layer 之間的 row adapter、annotation controller 的狀態對齊保護、GT / paste document API、paste candidate session，以及 GT 與 paste 的 action / draw / list / preview / workspace / candidate controllers，其中也包含 paste payload 在含有 Qt `QImage` 物件時的提交回歸保護、`Load Label` 的 append/replace 路徑、GT + paste 的聚合 export / analysis 行為、`Current folder` 與 `Current project` statistics 的 label 掃描、preflight summary 與 project-style 路徑對應、未載入 project config 時的 `images/ -> labels/` 自動推斷、folder/project-level 的輕量 header size probe、`Current folder` / `Current project` error analysis 的 GT/pred 掃描、label/prediction match 計數 / preflight summary / current-image override、`Current folder` / `Current project` dataset QC 的 missing sidecar / invalid YOLO / out-of-range bbox 檢查與 summary export、folder/project-level 的 prediction review summary / CSV / JSON 匯出，以及 `project_config` 對 classes/image/label/export default 的路徑接線，還有 folder-level prediction review / batch accept-reject / review queue 的 sidecar workflow 與 persistence。
+目前共 276 個測試，涵蓋所有 `sdde/` 模組的核心邏輯、legacy `data.yaml` 相容解析、GUI 與 service layer 之間的 row adapter、annotation controller 的狀態對齊保護、GT / paste document API、paste candidate session，以及 GT 與 paste 的 action / draw / list / preview / workspace / candidate controllers，其中也包含 paste payload 在含有 Qt `QImage` 物件時的提交回歸保護、`Load Label` 的 append/replace 路徑、GT + paste 的聚合 export / analysis 行為、`Current folder` 與 `Current project` statistics 的 label 掃描、preflight summary 與 project-style 路徑對應、未載入 project config 時的 `images/ -> labels/` 自動推斷、folder/project-level 的輕量 header size probe、`Current folder` / `Current project` error analysis 的 GT/pred 掃描、label/prediction match 計數 / preflight summary / current-image override、`Current folder` / `Current project` dataset QC 的 missing sidecar / invalid YOLO / out-of-range bbox 檢查與 summary export、folder/project-level 的 prediction review summary / CSV / JSON 匯出，以及 `project_config` 對 classes/image/label/export default 的路徑接線，還有 folder-level prediction review / batch accept-reject / review queue 的 sidecar workflow 與 persistence。
 如果準備進行重構，請再搭配 [`docs/manual_smoke_test.md`](docs/manual_smoke_test.md) 的手動 smoke test 清單一起回歸。
 
 ---
