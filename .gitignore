@@ -1,4 +1,32 @@
-/dataset
-/docs
-/rembg_img
-/.venv_broken
+# Python caches and test/build output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments and local environment files
+.venv/
+venv/
+/.venv_broken/
+.env
+.env.*
+!.env.example
+
+# OS and editor state
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime-generated application state
+.autosave/
+.review_state/
+
+# Curated examples in these directories remain tracked. Ignore newly added
+# local research data and cutout assets by default to avoid accidental commits.
+/dataset/
+/rembg_img/
